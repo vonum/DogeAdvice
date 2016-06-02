@@ -2,9 +2,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Doge Advice</title>
+
+<link rel="stylesheet" href="app/css/bootstrap.min.css">
+<link rel="stylesheet" href="app/css/app.css">
+
+<script src="app/lib/angular.js"></script>
+<script src="app/lib/angular-websocket.js"></script>
+<script src="app/lib/angular-cookies.js"></script>
+<script src="app/lib/angular-route.js"></script>
+
+<script src="app/app.js"></script>
+<script src="app/controller/homeController.js"></script>
+
 </head>
 <body>
+
+	<div ng-app="dogeApp" class="container">	
+		<header>
+			<nav class="navbar navbar-default">
+				<div class="container">
+					<div class="navbar-header">
+						<!--  <a href="#"><img src="app/img/doge.jpg" class="img-responsive"></a>-->
+						<a href="#/">pls</a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li><a href="#choose"><i class="fa fa-home"></i> Start</a></li>
+						<li><a href="#about"><i class="fa fa-home"></i> About</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		
+		<!-- Main content -->
+		<div>
+			<div ng-view></div>	
+		</div>
+		
+	</div>
 
 </body>
 </html>
