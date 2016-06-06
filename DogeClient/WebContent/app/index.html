@@ -14,32 +14,32 @@
 
 <script src="app/app.js"></script>
 <script src="app/controller/homeController.js"></script>
+<script src="app/controller/diagnoseController.js"></script>
 
 </head>
-<body>
+<body ng-app="dogeApp">
 
-	<div ng-app="dogeApp" class="container">	
-		<header>
-			<nav class="navbar navbar-default">
-				<div class="container">
-					<div class="navbar-header">
-						<!--  <a href="#"><img src="app/img/doge.jpg" class="img-responsive"></a>-->
-						<a href="#/">pls</a>
-					</div>
-					<ul class="nav navbar-nav">
-						<li><a href="#choose"><i class="fa fa-home"></i> Start</a></li>
-						<li><a href="#about"><i class="fa fa-home"></i> About</a></li>
-					</ul>
-				</div>
-			</nav>
-		</header>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#/"><img src="app/img/doge.jpg" class="img-circle" alt="Doge">
+        </a>
+      </div>
+      <div id="navbar3" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li class="active"><a href="#">Home</a></li> -->
+          <li><a href="#/start">Start</a></li>
+          <li><a href="#/about">About</a></li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+  </nav>
 		
-		<!-- Main content -->
-		<div>
-			<div ng-view></div>	
-		</div>
-		
-	</div>
+  <!-- Main content -->
+  <div class="container test" ng-view></div>	
+
 
 </body>
 </html>
