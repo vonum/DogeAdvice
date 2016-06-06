@@ -5,7 +5,7 @@
 	
 	function diagnoseController($scope, $websocket) {
 		
-		var ws = $websocket('ws://localhost:8080/DogeClient/websocket/');
+		var ws = $websocket('ws://localhost:8080/DogeClient/websocket');
 		//var ws = $websocket('ws://echo.websocket.org/');
 		
 		ws.onMessage(function (event) {
@@ -26,9 +26,7 @@
 		
 		$scope.sendResponse = function(response)
 		{
-			
-			
-			
+			ws.send(response);
 		}
 		
 	}

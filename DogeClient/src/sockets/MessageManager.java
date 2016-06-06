@@ -1,4 +1,4 @@
-package socket;
+package sockets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@Singleton
 @ServerEndpoint("/websocket")
+@Singleton
 public class MessageManager {
 
 	private List<Session> sessions;
