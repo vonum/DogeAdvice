@@ -3,6 +3,7 @@ package sockets;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -11,10 +12,15 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import rete.ReteRemote;
+
 @ServerEndpoint("/websocket")
 @Singleton
 public class MessageManager {
 
+	@EJB
+	ReteRemote reteBean;
+	
 	private List<Session> sessions;
 	
 	public MessageManager()
@@ -36,6 +42,7 @@ public class MessageManager {
 	{
 		System.out.println("WE GOT A MESSAGE");
 		System.out.println(message);
+		reteBean.test();
 	}
 	
 	@OnClose
