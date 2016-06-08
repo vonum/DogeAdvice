@@ -3,6 +3,7 @@ package socket.client;
 import java.io.IOException;
 import java.net.URI;
 
+import javax.ejb.AccessTimeout;
 import javax.websocket.ClientEndpoint;
 import javax.websocket.ContainerProvider;
 import javax.websocket.OnMessage;
@@ -14,7 +15,7 @@ import javax.websocket.WebSocketContainer;
 public class ClientMessenger {
 	
 	private Session session;
-	public boolean ready;
+	private boolean ready;
 	
 	public ClientMessenger(String URL)
 	{
@@ -36,26 +37,32 @@ public class ClientMessenger {
 	@OnOpen
 	public void onOpen(Session session)
 	{
+		System.out.println("Connection established");
 		this.session = session;
 		ready = true;
+		System.out.println("SET TO READY");
 	}
 	 
 	@OnMessage
 	public void onMessage(String message, Session session)
 	{
-	    System.out.println(message);
+	    //System.out.println(message);
 	}
 	 
 	public void sendMessage(String message)
 	{
-		while(!ready)
+		System.out.println("Sending message to ServerEndpoint");
+		/*while(!ready)
 		{
+			System.out.println("pls");
 			//wait
-		}
+		}*/
 		try
 		{
 			if(session != null)
 			{
+				System.out.println("CLIENT SOCKET SENDING MESSAGE");
+				System.out.println(ready);
 				session.getBasicRemote().sendText(message);
 			}
 			else
