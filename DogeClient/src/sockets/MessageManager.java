@@ -1,7 +1,8 @@
 package sockets;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.AccessTimeout;
@@ -23,11 +24,13 @@ public class MessageManager {
 	@EJB
 	ReteRemote reteBean;
 	
-	private List<Session> sessions;
+	//private List<Session> sessions;
+	private Map<String, Session> sessions;
 	
 	public MessageManager()
 	{
-		sessions = new ArrayList<Session>();
+		//sessions = new ArrayList<Session>();
+		sessions = new HashMap<String, Session>();
 	}
 	
 	@PostConstruct
@@ -40,9 +43,9 @@ public class MessageManager {
 	@AccessTimeout(20000)
 	public void onOpen(Session session) 
 	{
-		if(!sessions.contains(session))
+		if(sessions.get(session.getId()) != null)
 		{
-			sessions.add(session);
+			sessions.put(session.getId(), session);
 		}
 	}
 	
@@ -52,19 +55,25 @@ public class MessageManager {
 	{
 		System.out.println("WE GOT A MESSAGE");
 		System.out.println(message);
+		try {
+			session.getBasicRemote().sendText("Reply from server");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 		//reteBean.test();
 	}
 	
 	@OnClose
 	public void close(Session session)
 	{
-		sessions.remove(session);
+		sessions.remove(session.getId());
 	}
 	
 	@OnError
 	public void error(Session session, Throwable t)
 	{
-		sessions.remove(session);
+		sessions.remove(session.getId());
 		t.printStackTrace();
 	}
 }

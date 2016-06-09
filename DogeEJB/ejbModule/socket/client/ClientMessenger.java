@@ -40,7 +40,7 @@ public class ClientMessenger {
 		System.out.println("Connection established");
 		this.session = session;
 		ready = true;
-		System.out.println("SET TO READY");
+		//ZASTO SE NE SETUJE NA TRUE(DRUGI OBJEKAT?)
 	}
 	 
 	@OnMessage
@@ -54,7 +54,6 @@ public class ClientMessenger {
 		System.out.println("Sending message to ServerEndpoint");
 		/*while(!ready)
 		{
-			System.out.println("pls");
 			//wait
 		}*/
 		try
