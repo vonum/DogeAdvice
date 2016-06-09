@@ -15,6 +15,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import jess.Fact;
 import rete.ReteRemote;
 
 @ServerEndpoint("/websocket")
@@ -61,6 +62,11 @@ public class MessageManager {
 			// TODO Auto-generated catch block
 			e.getMessage();
 		}
+		if(message.equals("true"))
+		{
+			reteBean.assertFact(session.getId());
+		}
+		reteBean.listFacts();
 		//reteBean.test();
 	}
 	
