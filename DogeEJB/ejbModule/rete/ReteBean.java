@@ -2,7 +2,6 @@ package rete;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
-import javax.ejb.Stateless;
 
 import jess.Fact;
 import jess.JessException;
@@ -10,6 +9,7 @@ import jess.RU;
 import jess.Rete;
 import jess.Value;
 import socket.client.ClientMessenger;
+import thread.EngineThread;
 
 /**
  * Session Bean implementation class ReteBean
@@ -29,7 +29,8 @@ public class ReteBean implements ReteRemote {
     	engine.store("bridge", new ClientMessenger("ws://localhost:8080/DogeClient/websocket"));
     	engine.batch("rules/test.clp");
     	engine.batch("templates/templates.clp");
-    	engine.run();
+    	//engine.run();
+    	new EngineThread(engine).start();
     }
 	@Override
 	public void test() {
