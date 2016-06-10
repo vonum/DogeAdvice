@@ -1,3 +1,7 @@
+(import socket.client.ClientMessenger)
+
+(bind ?bridge (fetch "bridge"))
+
 (deftemplate diagnosis
 	(slot name (type STRING))
     (slot user (type STRING))
@@ -36,3 +40,35 @@
     (question (for-symptom head-up) (text "Is his head up?"))
     (question (for-symptom tail-up) (text "Is his tail up?"))
 )
+
+(defrule ask-question
+   (need-symptom (name ?name) (user ?u))
+   (question (for-symptom ?name) (text ?text))
+   (not(diagnosis (user ?u)))
+    =>
+   (call ?bridge sendMessage ?text)
+   (printout t ?text crlf)
+ 	;(assert(symptom(name ?name) (value (read t)) (user ?u)))   
+)
+
+(defrule fear-induced
+	(symptom (name approached) (value TRUE) (user ?u))
+    (or (symptom (name head-down) (value TRUE) (user ?u))
+        (symptom (name tail-tucked) (value TRUE) (user ?u))
+        (symptom (name eyes-wide-open) (value TRUE) (user ?u))
+    )    
+    =>
+    (assert(diagnosis (name fear-induced-aggression) (user ?u)))   
+)
+
+(defrule dominance-related
+	(symptom (name resents-reaching-towards) (value TRUE) (user ?u))
+    (symptom (name approaching-food) (value TRUE) (user ?u))
+        (or (symptom (name head-up) (value TRUE) (user ?u))
+    	(symptom (name tail-up) (value TRUE) (user ?u))    
+    )     
+    =>
+    (assert (diagnosis (name dominance-related-aggression) (user ?u)))  
+)
+
+(reset)

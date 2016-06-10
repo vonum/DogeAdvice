@@ -60,8 +60,6 @@ public class ClientMessenger {
 		{
 			if(session != null)
 			{
-				System.out.println("CLIENT SOCKET SENDING MESSAGE");
-				System.out.println(ready);
 				session.getBasicRemote().sendText(message);
 			}
 			else

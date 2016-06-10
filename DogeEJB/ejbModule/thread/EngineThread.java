@@ -20,7 +20,7 @@ public class EngineThread extends Thread {
 		} catch (JessException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error while running jess engine");
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 	}
 

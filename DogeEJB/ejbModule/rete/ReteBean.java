@@ -28,7 +28,7 @@ public class ReteBean implements ReteRemote {
     	engine = new Rete();
     	engine.store("bridge", new ClientMessenger("ws://localhost:8080/DogeClient/websocket"));
     	engine.batch("rules/test.clp");
-    	engine.batch("templates/templates.clp");
+    	//engine.batch("templates/templates.clp");
     	//engine.run();
     	new EngineThread(engine).start();
     }
@@ -58,14 +58,41 @@ public class ReteBean implements ReteRemote {
 		// TODO Auto-generated method stub
 		try {
 			Fact fact = new Fact("symptom", engine);
-			fact.setSlotValue("name", new Value("pls", RU.STRING));
+			fact.setSlotValue("name", new Value("approached", RU.SYMBOL));
 			fact.setSlotValue("value", new Value("TRUE", RU.SYMBOL));
 			fact.setSlotValue("user", new Value(sessionId, RU.STRING));
 			engine.assertFact(fact);
 		} catch (JessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Falied asserting fact");
+			System.out.println(e.getMessage());
 		}
+	}
+	@Override
+	public void assertFactFor(String sessionId, boolean response) {
+		
+		try {
+		
+			Fact need_symptom = engine.fetch(sessionId).factValue(engine.getGlobalContext());
+		
+			Fact fact = new Fact("symptom", engine);
+			fact.setSlotValue("name", need_symptom.getSlotValue("name"));
+			fact.setSlotValue("value", new Value("TRUE", RU.SYMBOL));
+			fact.setSlotValue("user", new Value(sessionId, RU.STRING));
+			
+			engine.assertFact(fact);
+			
+		} catch (JessException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Falied asserting fact");
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	@Override
+	public Object fetchObject(String name) {
+		// TODO Auto-generated method stub
+		return engine.fetch(name);
 	}
 
 }

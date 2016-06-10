@@ -10,6 +10,7 @@
 		
 		ws.onMessage(function (event) {
 			console.log('messageReceived', event);
+			$scope.question = event.data;
 		});
 		
 		ws.onError(function (event) {
@@ -20,10 +21,11 @@
         });
         ws.onOpen(function () {
             console.log('connection open');
-            ws.send('HELLO SERVER');
+            ws.send('hello');
         });
 		
-		
+		$scope.question = "Welcome to DogeApp";
+        
 		$scope.sendResponse = function(response)
 		{
 			ws.send(response);
