@@ -11,8 +11,15 @@
 		ws.onMessage(function (event) {
 			console.log('messageReceived', event);
 			var parts = event.data.split(':');
-			$scope.title = parts[0];
-			$scope.question = parts[1];
+			if(parts[0] === "diagnosis")
+			{
+				$scope.diagnosis = parts[1];
+			}
+			else
+			{
+				$scope.title = parts[0];
+				$scope.question = parts[1];
+			}
 		});
 		
 		ws.onError(function (event) {
@@ -25,6 +32,8 @@
             console.log('connection open');
             ws.send('hello');
         });
+        
+        $scope.diagnosis = "";
 		
 		$scope.question = "Welcome to DogeApp";
         

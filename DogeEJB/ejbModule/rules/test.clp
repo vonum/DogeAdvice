@@ -57,7 +57,8 @@
         (symptom (name eyes-wide-open) (value TRUE) (user ?u))
     )    
     =>
-    (assert(diagnosis (name fear-induced-aggression) (user ?u)))   
+    (assert(diagnosis (name fear-induced-aggression) (user ?u)))
+    (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Fear induced aggression"))   
 )
 
 (defrule dominance-related
@@ -68,6 +69,7 @@
     )     
     =>
     (assert (diagnosis (name dominance-related-aggression) (user ?u)))  
+    (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Dominance related aggression"))
 )
 
 (reset)

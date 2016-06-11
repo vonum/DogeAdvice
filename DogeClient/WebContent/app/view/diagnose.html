@@ -1,4 +1,4 @@
-<div class="panel panel-default row-panel">
+<div ng-show="diagnosis === ''" class="panel panel-default row-panel">
   <h1 class="text-center">Disease</h1>
     <div class="panel-body">
        <h3>{{ question }}</h3>
@@ -10,4 +10,10 @@
         <button type="button" class="btn btn-primary" ng-click="sendResponse('false')">False</button>
       </div>
     </div>
+</div>
+
+<div ng-show="diagnosis !== ''">
+
+	<p>{{ diagnosis }} </p>
+
 </div>

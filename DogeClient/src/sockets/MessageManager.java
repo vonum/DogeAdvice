@@ -83,7 +83,7 @@ public class MessageManager {
 		{
 			reteBean.listFacts();
 		}
-		else	//treba da dodamo question za usera
+		else if(message.startsWith("question"))	//treba da dodamo question za usera
 		{
 			//question:user:name:text
 			String[] parts = message.split(":");
@@ -94,6 +94,11 @@ public class MessageManager {
 				sendQuestion(sessions.get(parts[1]));
 				//sessions.get(parts[1]).getBasicRemote().sendText(parts[2] + ":" + parts[3]);
 			}
+		}
+		else if(message.startsWith("diagnosis"))
+		{
+			String[] parts = message.split(":");
+			sessions.get(parts[1]).getBasicRemote().sendText("diagnosis:" + parts[2]);
 		}
 		//reteBean.test();
 	}
