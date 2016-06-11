@@ -14,7 +14,7 @@ public interface ReteRemote {
 	
 	public void assertFact(String sessionId);
 	
-	public void assertFactFor(String sessionId, boolean response);
+	public void assertFactFor(String sessionId, String symptom, boolean response);
 	
 	public Object fetchObject(String name);
 }

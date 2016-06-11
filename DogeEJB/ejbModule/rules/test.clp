@@ -45,7 +45,7 @@
    (not(diagnosis (user ?u)))
     =>
    (store ?u ?var)
-   (call ?bridge sendMessage (str-cat "question:" ?u ":" ?text))
+   (call ?bridge sendMessage (str-cat "question:" ?u ":" ?name ":" ?text))
    ;(printout t ?text crlf)
  	;(assert(symptom(name ?name) (value (read t)) (user ?u)))   
 )

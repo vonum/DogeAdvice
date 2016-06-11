@@ -10,7 +10,9 @@
 		
 		ws.onMessage(function (event) {
 			console.log('messageReceived', event);
-			$scope.question = event.data;
+			var parts = event.data.split(':');
+			$scope.title = parts[0];
+			$scope.question = parts[1];
 		});
 		
 		ws.onError(function (event) {
@@ -28,6 +30,7 @@
         
 		$scope.sendResponse = function(response)
 		{
+			response = response + ":" + $scope.title;
 			ws.send(response);
 		}
 		

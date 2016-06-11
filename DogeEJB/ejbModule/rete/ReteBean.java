@@ -69,14 +69,15 @@ public class ReteBean implements ReteRemote {
 		}
 	}
 	@Override
-	public void assertFactFor(String sessionId, boolean response) {
+	public void assertFactFor(String sessionId, String symptom, boolean response) {
 		
 		try {
 		
-			Fact need_symptom = engine.fetch(sessionId).factValue(engine.getGlobalContext());
+			//Fact need_symptom = engine.fetch(sessionId).factValue(engine.getGlobalContext());
 		
 			Fact fact = new Fact("symptom", engine);
-			fact.setSlotValue("name", need_symptom.getSlotValue("name"));
+			//fact.setSlotValue("name", need_symptom.getSlotValue("name"));
+			fact.setSlotValue("name", new Value(symptom, RU.SYMBOL));
 			fact.setSlotValue("value", new Value("TRUE", RU.SYMBOL));
 			fact.setSlotValue("user", new Value(sessionId, RU.STRING));
 			
