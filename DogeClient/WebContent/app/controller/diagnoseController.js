@@ -15,6 +15,10 @@
 			{
 				$scope.diagnosis = parts[1];
 			}
+			else if(parts[0] === "unlucky")
+			{
+				//$scope.diagnosis = "We couldn't diagnose your dog with our current knowledge base";
+			}
 			else
 			{
 				$scope.title = parts[0];
@@ -41,6 +45,11 @@
 		{
 			response = response + ":" + $scope.title;
 			ws.send(response);
+		}
+		
+		$scope.facts = function()
+		{
+			ws.send("facts");
 		}
 		
 	}

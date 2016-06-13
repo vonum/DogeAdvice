@@ -27,9 +27,13 @@ public class ReteBean implements ReteRemote {
         // TODO Auto-generated constructor stub
     	engine = new Rete();
     	engine.store("bridge", new ClientMessenger("ws://localhost:8080/DogeClient/websocket"));
-    	engine.batch("rules/test.clp");
-    	//engine.batch("templates/templates.clp");
-    	//engine.run();
+    	//engine.batch("rules/test.clp");
+    	
+    	engine.batch("templates/templates.clp");
+    	engine.batch("rules/general.clp");
+    	engine.batch("rules/aggression.clp");
+    	engine.batch("rules/init.clp");
+    	
     	new EngineThread(engine).start();
     }
 	@Override
@@ -58,7 +62,7 @@ public class ReteBean implements ReteRemote {
 		// TODO Auto-generated method stub
 		try {
 			Fact fact = new Fact("symptom", engine);
-			fact.setSlotValue("name", new Value("approached", RU.SYMBOL));
+			fact.setSlotValue("name", new Value("aggression", RU.SYMBOL));
 			fact.setSlotValue("value", new Value("TRUE", RU.SYMBOL));
 			fact.setSlotValue("user", new Value(sessionId, RU.STRING));
 			engine.assertFact(fact);
@@ -78,7 +82,7 @@ public class ReteBean implements ReteRemote {
 			Fact fact = new Fact("symptom", engine);
 			//fact.setSlotValue("name", need_symptom.getSlotValue("name"));
 			fact.setSlotValue("name", new Value(symptom, RU.SYMBOL));
-			fact.setSlotValue("value", new Value("TRUE", RU.SYMBOL));
+			fact.setSlotValue("value", new Value(response ? "TRUE" : "FALSE", RU.SYMBOL));
 			fact.setSlotValue("user", new Value(sessionId, RU.STRING));
 			
 			engine.assertFact(fact);

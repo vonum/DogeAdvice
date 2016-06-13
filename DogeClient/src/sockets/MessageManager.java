@@ -81,6 +81,16 @@ public class MessageManager {
 		}
 		else if(message.startsWith("false"))
 		{
+			String[] parts = message.split(":");
+			
+			System.out.println(questions);
+			System.out.println(message);
+			reteBean.assertFactFor(session.getId(), parts[1], false);
+			states.put(session.getId(), true);
+			sendQuestion(session);
+		}
+		else if(message.equals("facts"))
+		{
 			reteBean.listFacts();
 		}
 		else if(message.startsWith("question"))	//treba da dodamo question za usera
@@ -135,6 +145,7 @@ public class MessageManager {
 				System.out.println(questions.get(session.getId()).size());
 				System.out.println(states.get(session.getId()));
 				System.out.println("No questions to send");
+				session.getBasicRemote().sendText("unlucky");
 			}
 			
 		} catch (IOException e) {
