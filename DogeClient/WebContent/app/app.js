@@ -8,7 +8,7 @@ dogeApp.config(function($routeProvider) {
 	})
 	.when('/start', {
 		templateUrl: "app/view/start.html",
-		controller: "homeController"
+		controller: "startController"
 	})
 	.when('/diagnose', {
 		templateUrl: "app/view/diagnose.html",

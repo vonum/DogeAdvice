@@ -66,7 +66,8 @@ public class MessageManager {
 
 		if(message.equals("hello"))
 		{
-			reteBean.assertFact(session.getId());
+			//reteBean.assertFact(session.getId());
+			session.getBasicRemote().sendText("pls");
 		}
 		else if(message.startsWith("true"))
 		{

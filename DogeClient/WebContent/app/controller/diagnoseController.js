@@ -1,14 +1,22 @@
 (function() {
 	angular.module("dogeApp").controller("diagnoseController", diagnoseController);
 	
-	diagnoseController.$inject = ["$scope", "$websocket"];
+	diagnoseController.$inject = ["$scope", "$websocket", "socketService"];
 	
-	function diagnoseController($scope, $websocket) {
+	function diagnoseController($scope, $websocket, socketService) {
 		
 		var ws = $websocket('ws://localhost:8080/DogeClient/websocket');
 		//var ws = $websocket('ws://echo.websocket.org/');
 		
+		$scope.a = socketService.a;
+		
+		ws = socketService.ws;
+		
 		ws.onMessage(function (event) {
+			alert(event.data);
+		});
+		
+		/*ws.onMessage(function (event) {
 			console.log('messageReceived', event);
 			var parts = event.data.split(':');
 			if(parts[0] === "diagnosis")
@@ -35,7 +43,7 @@
         ws.onOpen(function () {
             console.log('connection open');
             ws.send('hello');
-        });
+        });*/
         
         $scope.diagnosis = "";
 		
