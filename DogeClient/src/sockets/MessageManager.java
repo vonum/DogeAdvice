@@ -66,8 +66,12 @@ public class MessageManager {
 
 		if(message.equals("hello"))
 		{
-			//reteBean.assertFact(session.getId());
-			session.getBasicRemote().sendText("pls");
+			reteBean.assertFact(session.getId());
+			//session.getBasicRemote().sendText("pls");
+		}
+		else if(message.equals("remove"))
+		{
+			reteBean.removeFactsForUser(session.getId());
 		}
 		else if(message.startsWith("true"))
 		{
@@ -117,12 +121,14 @@ public class MessageManager {
 	@OnClose
 	public void close(Session session)
 	{
+		reteBean.removeFactsForUser(session.getId());
 		removeUser(session.getId());
 	}
 	
 	@OnError
 	public void error(Session session, Throwable t)
 	{
+		reteBean.removeFactsForUser(session.getId());
 		removeUser(session.getId());
 		t.printStackTrace();
 	}

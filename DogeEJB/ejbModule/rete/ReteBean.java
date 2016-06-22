@@ -1,9 +1,13 @@
 package rete;
 
+import java.util.Iterator;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 
 import jess.Fact;
+import jess.Filter;
+import jess.FilteringIterator;
 import jess.JessException;
 import jess.RU;
 import jess.Rete;
@@ -98,6 +102,29 @@ public class ReteBean implements ReteRemote {
 	public Object fetchObject(String name) {
 		// TODO Auto-generated method stub
 		return engine.fetch(name);
+	}
+	@Override
+	public void removeFactsForUser(String sessionId) {
+		// TODO Auto-generated method stub
+		@SuppressWarnings("unchecked")
+		Iterator<Fact> it = engine.listFacts();
+        while (it.hasNext()) 
+        {
+        	Fact f = (Fact) it.next();
+        	//System.out.println("Za fakt sa rednim brojem " + fa.getFactId() + " tipa " + fa.getName());
+        	
+    		try {
+				if(f.getSlotValue("user").stringValue(null).equals(sessionId))
+				{
+					engine.retract(f);
+				}
+			} catch (JessException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Error while removing facts for user");
+				System.out.println(e.getMessage());
+			}
+    		
+		}
 	}
 
 }

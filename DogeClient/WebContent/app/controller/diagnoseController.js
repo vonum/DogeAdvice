@@ -12,11 +12,11 @@
 		
 		ws = socketService.ws;
 		
-		ws.onMessage(function (event) {
-			alert(event.data);
-		});
-		
 		/*ws.onMessage(function (event) {
+			alert(event.data);
+		});*/
+		
+		ws.onMessage(function (event) {
 			console.log('messageReceived', event);
 			var parts = event.data.split(':');
 			if(parts[0] === "diagnosis")
@@ -34,7 +34,7 @@
 			}
 		});
 		
-		ws.onError(function (event) {
+		/*ws.onError(function (event) {
 			console.log('connection Error', event);
         });
         ws.onClose(function (event) {
@@ -53,6 +53,11 @@
 		{
 			response = response + ":" + $scope.title;
 			ws.send(response);
+		}
+		
+		$scope.remove = function()
+		{
+			ws.send("remove");
 		}
 		
 		$scope.facts = function()
