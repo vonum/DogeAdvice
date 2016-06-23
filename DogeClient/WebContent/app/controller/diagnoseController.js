@@ -4,17 +4,9 @@
 	diagnoseController.$inject = ["$scope", "$websocket", "socketService"];
 	
 	function diagnoseController($scope, $websocket, socketService) {
-		
-		var ws = $websocket('ws://localhost:8080/DogeClient/websocket');
-		//var ws = $websocket('ws://echo.websocket.org/');
-		
-		$scope.a = socketService.a;
+		//var ws = $websocket('ws://localhost:8080/DogeClient/websocket');
 		
 		ws = socketService.ws;
-		
-		/*ws.onMessage(function (event) {
-			alert(event.data);
-		});*/
 		
 		ws.onMessage(function (event) {
 			console.log('messageReceived', event);
@@ -23,7 +15,7 @@
 			{
 				$scope.diagnosis = parts[1];
 			}
-			else if(parts[0] === "unlucky")
+			else if(parts[0] === "noquestions")
 			{
 				//$scope.diagnosis = "We couldn't diagnose your dog with our current knowledge base";
 			}
@@ -32,7 +24,10 @@
 				$scope.title = parts[0];
 				$scope.question = parts[1];
 			}
+
 		});
+		
+		ws.send("ready");
 		
 		/*ws.onError(function (event) {
 			console.log('connection Error', event);

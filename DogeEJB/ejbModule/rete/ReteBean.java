@@ -6,8 +6,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 
 import jess.Fact;
-import jess.Filter;
-import jess.FilteringIterator;
 import jess.JessException;
 import jess.RU;
 import jess.Rete;
@@ -40,16 +38,7 @@ public class ReteBean implements ReteRemote {
     	
     	new EngineThread(engine).start();
     }
-	@Override
-	public void test() {
-		// TODO Auto-generated method stub
-		try {
-			engine.eval("(printout t \"message from rete\" crlf)");
-		} catch (JessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 	@Override
 	public void listFacts() {
 		// TODO Auto-generated method stub
@@ -62,11 +51,11 @@ public class ReteBean implements ReteRemote {
 		}
 	}
 	@Override
-	public void assertFact(String sessionId) {
+	public void assertInitialFact(String sessionId, String category) {
 		// TODO Auto-generated method stub
 		try {
 			Fact fact = new Fact("symptom", engine);
-			fact.setSlotValue("name", new Value("aggression", RU.SYMBOL));
+			fact.setSlotValue("name", new Value(category, RU.SYMBOL));
 			fact.setSlotValue("value", new Value("TRUE", RU.SYMBOL));
 			fact.setSlotValue("user", new Value(sessionId, RU.STRING));
 			engine.assertFact(fact);

@@ -20,18 +20,10 @@
     });
     ws.onOpen(function () {
         console.log('connection open');
-        ws.send('hello');
+        //ws.send('hello');
     });
-	  
-    var a = 3;
-    var test = function()
-    {
-      alert("pls");
-    };
 
     return {
-      test: test,
-      a: a,
       ws: ws
     };
 

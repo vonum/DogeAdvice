@@ -7,12 +7,10 @@ import jess.JessException;
 
 @Remote
 public interface ReteRemote {
-
-	public void test();
 	
 	public void listFacts();
 	
-	public void assertFact(String sessionId);
+	public void assertInitialFact(String sessionId, String category);
 	
 	public void assertFactFor(String sessionId, String symptom, boolean response);
 	

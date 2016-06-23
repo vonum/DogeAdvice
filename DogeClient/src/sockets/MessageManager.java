@@ -43,18 +43,18 @@ public class MessageManager {
 	@PostConstruct
 	public void initRete()
 	{
-		reteBean.test();
 	}
 	
 	@OnOpen
 	@AccessTimeout(20000)
 	public void onOpen(Session session) 
 	{
+		System.out.println("Openning connection");
 		if(sessions.get(session.getId()) == null)
 		{
 			sessions.put(session.getId(), session);
 			questions.put(session.getId(), new ArrayList<Question>());
-			states.put(session.getId(), true);
+			states.put(session.getId(), false); //false
 		}
 	}
 	
@@ -63,11 +63,16 @@ public class MessageManager {
 	public void handleMessage(Session session, String message, boolean last) throws IOException
 	{
 		System.out.println("Message: " + message);
-
-		if(message.equals("hello"))
+		
+		if(message.startsWith("init"))
 		{
-			reteBean.assertFact(session.getId());
-			//session.getBasicRemote().sendText("pls");
+			String[] parts = message.split(":");
+			reteBean.assertInitialFact(session.getId(), parts[1]);
+		}
+		else if(message.equals("ready"))
+		{
+			states.put(session.getId(), true);
+			sendQuestion(session);
 		}
 		else if(message.equals("remove"))
 		{
@@ -115,7 +120,6 @@ public class MessageManager {
 			String[] parts = message.split(":");
 			sessions.get(parts[1]).getBasicRemote().sendText("diagnosis:" + parts[2]);
 		}
-		//reteBean.test();
 	}
 	
 	@OnClose
@@ -130,7 +134,7 @@ public class MessageManager {
 	{
 		reteBean.removeFactsForUser(session.getId());
 		removeUser(session.getId());
-		t.printStackTrace();
+		System.out.println("Socket closed because of error : " + t.getMessage());
 	}
 	
 	private void sendQuestion(Session session)
@@ -140,19 +144,26 @@ public class MessageManager {
 			//uzmemo poslednje dodato pitanje, posaljemo klijentu i izbacimo iz liste
 			if(questions.get(session.getId()).size() > 0 && states.get(session.getId()))
 			{
+				//zabrani slanje ostalih pitanja
+				states.put(session.getId(), false);
+				
 				Question question = questions.get(session.getId()).get(0);
 				questions.get(session.getId()).remove(0);
+				
 				session.getBasicRemote().sendText(question.getName() + ":" + question.getText());
 				//postavi da korisnik odgovara na pitanje
-				states.put(session.getId(), false);
 			}
 			else
 			{
+				System.out.println("Not sending question");
 				System.out.println(session.getId());
 				System.out.println(questions.get(session.getId()).size());
 				System.out.println(states.get(session.getId()));
 				System.out.println("No questions to send");
-				session.getBasicRemote().sendText("unlucky");
+				if(!states.get(session.getId()))
+				{
+					session.getBasicRemote().sendText("noquestions");
+				}
 			}
 			
 		} catch (IOException e) {
