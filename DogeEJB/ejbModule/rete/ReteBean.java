@@ -30,10 +30,13 @@ public class ReteBean implements ReteRemote {
     	engine = new Rete();
     	engine.store("bridge", new ClientMessenger("ws://localhost:8080/DogeClient/websocket"));
     	//engine.batch("rules/test.clp");
-    	
+    	//napraviti da ucita sve clp file-ove i batchuje, proslediti nazive paketa, i ucitati sve clp-ove iz tog paketa
     	engine.batch("templates/templates.clp");
     	engine.batch("rules/general.clp");
     	engine.batch("rules/aggression.clp");
+    	engine.batch("rules/coughing.clp");
+    	engine.batch("questions/aggression-questions.clp");
+    	engine.batch("questions/coughing-questions.clp");
     	engine.batch("rules/init.clp");
     	
     	new EngineThread(engine).start();
@@ -66,16 +69,16 @@ public class ReteBean implements ReteRemote {
 		}
 	}
 	@Override
-	public void assertFactFor(String sessionId, String symptom, boolean response) {
+	public void assertFactFor(String sessionId, String type, String name, boolean response) {
 		
 		try {
 		
 			//Fact need_symptom = engine.fetch(sessionId).factValue(engine.getGlobalContext());
 		
-			Fact fact = new Fact("symptom", engine);
+			Fact fact = new Fact(type, engine);
 			//fact.setSlotValue("name", need_symptom.getSlotValue("name"));
-			fact.setSlotValue("name", new Value(symptom, RU.SYMBOL));
-			fact.setSlotValue("value", new Value(response ? "TRUE" : "FALSE", RU.SYMBOL));
+			fact.setSlotValue("name", new Value(name, RU.SYMBOL));
+			if (type.equals("symptom")) fact.setSlotValue("value", new Value(response ? "TRUE" : "FALSE", RU.SYMBOL));
 			fact.setSlotValue("user", new Value(sessionId, RU.STRING));
 			
 			engine.assertFact(fact);

@@ -80,22 +80,23 @@ public class MessageManager {
 		}
 		else if(message.startsWith("true"))
 		{
-			//true:symptom
+			//true:symptom:name
 			String[] parts = message.split(":");
 			
 			System.out.println(questions);
 			System.out.println(message);
-			reteBean.assertFactFor(session.getId(), parts[1], true);
+			reteBean.assertFactFor(session.getId(), parts[1], parts[2], true);
 			states.put(session.getId(), true);
 			sendQuestion(session);
 		}
 		else if(message.startsWith("false"))
 		{
+			//false:symptom:name
 			String[] parts = message.split(":");
 			
 			System.out.println(questions);
 			System.out.println(message);
-			reteBean.assertFactFor(session.getId(), parts[1], false);
+			reteBean.assertFactFor(session.getId(), parts[1], parts[2], false);
 			states.put(session.getId(), true);
 			sendQuestion(session);
 		}
@@ -105,12 +106,15 @@ public class MessageManager {
 		}
 		else if(message.startsWith("question"))	//treba da dodamo question za usera
 		{
-			//question:user:name:text
+			//question:user:type:name:text
+			//type = symptom/localization...
+			//name = fear-induced/parental...
+			//text = question text
 			String[] parts = message.split(":");
 			if(parts[0].equals("question") && !parts[1].equals("nil"))
 			{
 				//dobijemo pitanje, dodamo u listu pitanja za konkretnog usera
-				questions.get(parts[1]).add(0, (new Question(parts[2], parts[3])));
+				questions.get(parts[1]).add(0, (new Question(parts[2], parts[3], parts[4])));
 				sendQuestion(sessions.get(parts[1]));
 				//sessions.get(parts[1]).getBasicRemote().sendText(parts[2] + ":" + parts[3]);
 			}
@@ -150,7 +154,7 @@ public class MessageManager {
 				Question question = questions.get(session.getId()).get(0);
 				questions.get(session.getId()).remove(0);
 				
-				session.getBasicRemote().sendText(question.getName() + ":" + question.getText());
+				session.getBasicRemote().sendText(question.getType() + ":" + question.getName() + ":" + question.getText());
 				//postavi da korisnik odgovara na pitanje
 			}
 			else

@@ -12,7 +12,7 @@ public interface ReteRemote {
 	
 	public void assertInitialFact(String sessionId, String category);
 	
-	public void assertFactFor(String sessionId, String symptom, boolean response);
+	public void assertFactFor(String sessionId, String type, String name, boolean response);
 	
 	public void removeFactsForUser(String sessionId);
 	

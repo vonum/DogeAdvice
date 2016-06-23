@@ -6,6 +6,11 @@
 	function diagnoseController($scope, $websocket, socketService) {
 		//var ws = $websocket('ws://localhost:8080/DogeClient/websocket');
 		
+        $scope.diagnosis = "";
+		$scope.question = "Welcome to DogeApp";
+		$scope.type = "";
+		
+		
 		ws = socketService.ws;
 		
 		ws.onMessage(function (event) {
@@ -21,8 +26,9 @@
 			}
 			else
 			{
-				$scope.title = parts[0];
-				$scope.question = parts[1];
+				$scope.type = parts[0];
+				$scope.title = parts[1];
+				$scope.question = parts[2];
 			}
 
 		});
@@ -40,13 +46,9 @@
             ws.send('hello');
         });*/
         
-        $scope.diagnosis = "";
-		
-		$scope.question = "Welcome to DogeApp";
-        
 		$scope.sendResponse = function(response)
 		{
-			response = response + ":" + $scope.title;
+			response = response + ":" + $scope.type + ":" + $scope.title;
 			ws.send(response);
 		}
 		
