@@ -66,6 +66,9 @@ public class MessageManager {
 		
 		if(message.startsWith("init"))
 		{
+			//remove existing facts and questions for user, and start from beginning
+			removeQuestions(session.getId());
+			reteBean.removeFactsForUser(session.getId());
 			String[] parts = message.split(":");
 			reteBean.assertInitialFact(session.getId(), parts[1]);
 		}
@@ -182,5 +185,10 @@ public class MessageManager {
 		sessions.remove(sessionId);
 		questions.remove(sessionId);
 		states.remove(sessionId);
+	}
+	
+	private void removeQuestions(String sessionId)
+	{
+		questions.get(sessionId).clear();
 	}
 }

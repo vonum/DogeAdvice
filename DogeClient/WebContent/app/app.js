@@ -3,19 +3,23 @@ var dogeApp = angular.module("dogeApp", ["ngRoute", "ngWebSocket"]);
 dogeApp.config(function($routeProvider) {
 	$routeProvider
 	.when('/', {
-		templateUrl: "app/view/home.html",
+		templateUrl: "view/home.html",
 		controller: "homeController"
 	})
 	.when('/start', {
-		templateUrl: "app/view/start.html",
+		templateUrl: "view/start1.html",
 		controller: "startController"
 	})
 	.when('/diagnose', {
-		templateUrl: "app/view/diagnose.html",
+		templateUrl: "view/diagnose1.html",
 		controller: "diagnoseController"
 	})
+	.when('/history', {
+		templateUrl: "view/history.html",
+		controller: "historyController"
+	})
 	.when('/about', {
-		templateUrl: "app/view/about.html",
+		templateUrl: "view/about.html",
 		controller: "homeController"
 	});
 });

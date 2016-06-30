@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <title>Doge Advice</title>
 
-<link rel="stylesheet" href="app/css/bootstrap.min.css">
-<link rel="stylesheet" href="app/css/app.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/app.css">
 
-<script src="app/lib/angular.js"></script>
-<script src="app/lib/angular-websocket.js"></script>
-<script src="app/lib/angular-cookies.js"></script>
-<script src="app/lib/angular-route.js"></script>
+<script src="lib/angular.js"></script>
+<script src="lib/angular-websocket.js"></script>
+<script src="lib/angular-cookies.js"></script>
+<script src="lib/angular-route.js"></script>
 
-<script src="app/app.js"></script>
-<script src="app/service/socketService.js"></script>
-<script src="app/controller/homeController.js"></script>
-<script src="app/controller/diagnoseController.js"></script>
-<script src="app/controller/startController.js"></script>
+<script src="app.js"></script>
+<script src="service/socketService.js"></script>
+<script src="controller/homeController.js"></script>
+<script src="controller/diagnoseController.js"></script>
+<script src="controller/startController.js"></script>
 
 </head>
 <body ng-app="dogeApp">
@@ -24,7 +24,7 @@
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#/"><img src="app/img/doge.jpg" class="img-circle" alt="Doge">
+        <a class="navbar-brand" href="#/"><img src="img/doge.jpg" class="img-circle" alt="Doge">
         </a>
       </div>
       <div id="navbar3" class="navbar-collapse collapse">
@@ -32,6 +32,7 @@
           <!-- <li class="active"><a href="#">Home</a></li> -->
           <li><a href="#/start">Start</a></li>
           <li><a href="#/about">About</a></li>
+          <li><a href="index-test.html">test</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -41,7 +42,6 @@
 		
   <!-- Main content -->
   <div class="container test" ng-view></div>	
-
 
 </body>
 </html>

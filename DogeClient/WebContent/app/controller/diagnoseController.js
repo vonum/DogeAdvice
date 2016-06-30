@@ -1,14 +1,15 @@
 (function() {
 	angular.module("dogeApp").controller("diagnoseController", diagnoseController);
 	
-	diagnoseController.$inject = ["$scope", "$websocket", "socketService"];
+	diagnoseController.$inject = ["$scope", "$websocket", "socketService", "historyService"];
 	
-	function diagnoseController($scope, $websocket, socketService) {
+	function diagnoseController($scope, $websocket, socketService, historyService) {
 		//var ws = $websocket('ws://localhost:8080/DogeClient/websocket');
 		
         $scope.diagnosis = "";
 		$scope.question = "Welcome to DogeApp";
 		$scope.type = "";
+		$scope.diagnosedWith = [];
 		
 		
 		ws = socketService.ws;
@@ -19,6 +20,11 @@
 			if(parts[0] === "diagnosis")
 			{
 				$scope.diagnosis = parts[1];
+				if($scope.diagnosedWith.indexOf(parts[1]) === -1)
+				{
+					$scope.diagnosedWith.push(parts[1]);
+					historyService.addDiagnosys(parts[1]);
+				}
 			}
 			else if(parts[0] === "noquestions")
 			{
