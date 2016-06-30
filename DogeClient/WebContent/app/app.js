@@ -7,11 +7,11 @@ dogeApp.config(function($routeProvider) {
 		controller: "homeController"
 	})
 	.when('/start', {
-		templateUrl: "view/start1.html",
+		templateUrl: "view/start.html",
 		controller: "startController"
 	})
 	.when('/diagnose', {
-		templateUrl: "view/diagnose1.html",
+		templateUrl: "view/diagnose.html",
 		controller: "diagnoseController"
 	})
 	.when('/history', {
