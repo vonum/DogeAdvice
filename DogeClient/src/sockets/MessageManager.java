@@ -167,10 +167,13 @@ public class MessageManager {
 				System.out.println(questions.get(session.getId()).size());
 				System.out.println(states.get(session.getId()));
 				System.out.println("No questions to send");
-				if(!states.get(session.getId()))
+				/*if(!states.get(session.getId()))
 				{
 					session.getBasicRemote().sendText("noquestions");
-				}
+				}*/
+				if(questions.get(session.getId()).isEmpty())
+				{
+					session.getBasicRemote().sendText("noquestions");				}
 			}
 			
 		} catch (IOException e) {

@@ -28,7 +28,7 @@
 			}
 			else if(parts[0] === "noquestions")
 			{
-				//$scope.diagnosis = "We couldn't diagnose your dog with our current knowledge base";
+				$scope.question = "No more questions to ask."
 			}
 			else
 			{
