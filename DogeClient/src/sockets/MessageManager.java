@@ -97,11 +97,19 @@ public class MessageManager {
 			//false:symptom:name
 			String[] parts = message.split(":");
 			
-			System.out.println(questions);
-			System.out.println(message);
-			reteBean.assertFactFor(session.getId(), parts[1], parts[2], false);
-			states.put(session.getId(), true);
-			sendQuestion(session);
+			if(!parts[1].equals("localization"))
+			{
+				System.out.println(questions);
+				System.out.println(message);
+				reteBean.assertFactFor(session.getId(), parts[1], parts[2], false);
+				states.put(session.getId(), true);
+				sendQuestion(session);
+			}
+			else	//ukoliko je false za lokalizaciju, samo se prosledi sledece pitanje
+			{
+				states.put(session.getId(), true);
+				sendQuestion(session);
+			}
 		}
 		else if(message.equals("facts"))
 		{
