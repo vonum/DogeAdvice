@@ -75,3 +75,52 @@
     (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Tumor na grkljanu"))    
 )
 
+(defrule povreda-grkljan
+ 	(symptom (name coughing) (user ?u))    
+    (localization (name gornji-trakt) (user ?u))
+    (localization (name grkljan) (user ?u))
+    (symptom (name povreda-grkljan) (value TRUE) (user ?u))
+    =>
+    (assert(diagnosis (name poreda-grkljan) (user ?u)))
+    (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Povreda na grkljanu"))        
+)
+
+(defrule upala-dusnik
+	(symptom (name coughing) (user ?u))    
+    (localization (name gornji-trakt) (user ?u))
+    (localization (name dusnik) (user ?u))
+    (symptom (name crvenilo-dusnik) (value TRUE) (user ?u))
+    (symptom (name otecen-dusnik) (value TRUE) (user ?u))
+    (symptom (name bol-dusnik) (value TRUE) (user ?u))	
+    =>
+    (assert(diagnosis (name upala-dusnik) (user ?u)))
+    (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Upala dusnika"))     
+)
+
+(defrule infekcija-dusnik
+	(diagnosis (name upala-dusnik) (user ?u))    
+    (symptom (name bakterija-dusnik) (value TRUE) (user ?u))
+	=>
+    (assert(diagnosis (name infekcija-dusnik) (user ?u)))
+    (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Infekcija dusnika"))          
+)
+
+(defrule strano-telo-dusnik
+	(symptom (name coughing) (user ?u))    
+    (localization (name gornji-trakt) (user ?u))
+    (localization (name dusnik) (user ?u))
+    (symptom (name strano-telo-dusnik) (value TRUE) (user ?u))
+    =>
+    (assert(diagnosis (name strano-telo-dusnik) (user ?u)))
+    (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Strano telo u dusniku"))    
+)
+
+(defrule tumor-dusnik
+	(symptom (name coughing) (user ?u))    
+    (localization (name gornji-trakt) (user ?u))
+    (localization (name dusnik) (user ?u))
+    (symptom (name tumor-dusnik) (value TRUE) (user ?u))
+    =>
+    (assert(diagnosis (name tumor-dusnik) (user ?u)))
+    (call ?bridge sendMessage (str-cat "diagnosis:" ?u ":" "Tumor u dusniku"))    
+)

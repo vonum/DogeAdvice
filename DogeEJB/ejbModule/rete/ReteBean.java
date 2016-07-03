@@ -32,11 +32,16 @@ public class ReteBean implements ReteRemote {
     	//engine.batch("rules/test.clp");
     	//napraviti da ucita sve clp file-ove i batchuje, proslediti nazive paketa, i ucitati sve clp-ove iz tog paketa
     	engine.batch("templates/templates.clp");
+    	
     	engine.batch("rules/general.clp");
     	engine.batch("rules/aggression.clp");
     	engine.batch("rules/coughing.clp");
+    	engine.batch("rules/deafness.clp");
+    	
     	engine.batch("questions/aggression-questions.clp");
     	engine.batch("questions/coughing-questions.clp");
+    	engine.batch("questions/deafness-questions.clp");
+    	
     	engine.batch("rules/init.clp");
     	
     	new EngineThread(engine).start();

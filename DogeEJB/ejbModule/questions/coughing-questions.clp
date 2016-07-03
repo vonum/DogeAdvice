@@ -19,4 +19,12 @@
     (question (for-symptom otecen-grkljan) (text "Da li je grkljan otecen?"))
     (question (for-symptom bol-grkljan) (text "Da li pas oseca bol pri dodiru u predelu grkljana?"))
     (question (for-symptom tumor-grkljan) (text "Da li se uocava izrastaj na grkljanu?"))
+    (question (for-symptom povreda-grkljan) (text "Da li se uocava rana na grkljanu?"))
+    
+    (question (for-symptom strano-telo-dusnik) (text "Da li se uocava strano telo u dusniku?"))
+    (question (for-symptom tumor-dusnik) (text "Da li se uocava izrastaj u dusniku?"))
+    (question (for-symptom crvenilo-dusnik) (text "Da li se uocava crvenilo u predelu dusnika?"))
+    (question (for-symptom otecen-dusnik) (text "Da li je dusnik otecen?"))
+    (question (for-symptom bol-dusnik) (text "Da li pas oseca bol u predelu dusnika?"))
+    (question (for-symptom bakterija-dusnik) (text "Da li se primecuju bakterije na brisu?"))
 )
