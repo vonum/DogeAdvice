@@ -17,15 +17,15 @@
           </div>
           <!-- /weather-2 header -->
           <div class="row centered">
-            <img src="assets/img/ny.jpg" class="img-circle" width="50%">
+            <img src="/DogeClient/app/assets/img/ny.jpg" class="img-circle" width="50%">
           </div>
 
           <div class="row centered">
             <div class="btn-group text-center">
               <button type="button" class="btn btn-theme03"
-                ng-click="sendResponse('true')">True</button>
+                ng-click="sendResponse('true')">Tačno</button>
               <button type="button" class="btn btn-theme04"
-                ng-click="sendResponse('false')">False</button>
+                ng-click="sendResponse('false')">Netačno</button>
             </div>
           </div>
 
@@ -36,7 +36,7 @@
 
     <div class="col-lg-3 ds">
       <!--COMPLETED ACTIONS DONUTS CHART-->
-      <h3>Diagnosed With</h3>
+      <h3>Trenutne dijagnoze za psa:</h3>
 
       <!-- First Action -->
       <div class="desc" ng-repeat="diagnosys in diagnosedWith">
@@ -44,10 +44,9 @@
           <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
         </div>
         <div class="details">
-          <p>
-            <muted>Aggression</muted>
-            <br /> <a href="#"> {{ diagnosys }}   </a> <br />
-          </p>
+          <h4>
+            <a href="#"> {{ diagnosys }}   </a> <br />
+          </h4>
         </div>
       </div>
 
