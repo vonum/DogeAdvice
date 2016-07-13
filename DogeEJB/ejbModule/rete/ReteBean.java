@@ -37,10 +37,12 @@ public class ReteBean implements ReteRemote {
     	engine.batch("rules/aggression.clp");
     	engine.batch("rules/coughing.clp");
     	engine.batch("rules/deafness.clp");
+    	engine.batch("rules/sight.clp");
     	
     	engine.batch("questions/aggression-questions.clp");
     	engine.batch("questions/coughing-questions.clp");
     	engine.batch("questions/deafness-questions.clp");
+    	engine.batch("questions/sight-questions.clp");
     	
     	engine.batch("rules/init.clp");
     	

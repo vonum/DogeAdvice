@@ -28,7 +28,7 @@
 			}
 			else if(parts[0] === "noquestions")
 			{
-				$scope.question = "No more questions to ask."
+				$scope.question = "Dijagnostifikovanje je zavrseno."
 			}
 			else
 			{
